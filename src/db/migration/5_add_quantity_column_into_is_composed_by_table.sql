@@ -1,0 +1,1 @@
+alter table is_composed_by add column quantity integer;
