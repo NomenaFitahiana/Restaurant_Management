@@ -11,6 +11,3 @@ alter table price add column ingredient_id int;
 
 alter table price add constraint fk_ingredient foreign key (ingredient_id) references ingredient (id) on delete cascade;
 
-alter table price drop column montant;
-
-alter table dish_ingredient add column montant float;
