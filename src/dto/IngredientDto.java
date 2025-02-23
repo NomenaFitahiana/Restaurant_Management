@@ -1,7 +1,9 @@
 package dto;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
+import dao.Ingredient;
 import dao.Unit;
 
 public class IngredientDto {
@@ -10,10 +12,10 @@ public class IngredientDto {
     private double unitPrice;
     private Unit unit;
     private LocalDateTime lastModificationDate;
-    private int quantity;
+    private double quantity;
     private double montant;
 
-    public IngredientDto(int id, String name, double unitPrice, Unit unit, LocalDateTime lastModificationDate, int quantity, double montant) {
+    public IngredientDto(int id, String name, double unitPrice, Unit unit, LocalDateTime lastModificationDate, double quantity, double montant) {
         this.name = name;
         this.unitPrice = unitPrice;
         this.unit = unit;
@@ -71,11 +73,11 @@ public class IngredientDto {
         this.lastModificationDate = addedOn;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
@@ -85,6 +87,19 @@ public class IngredientDto {
                 + "}";
     }
 
-    
+     @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+
+        IngredientDto ingredient = (IngredientDto) o;
+
+        return Objects.equals(id, ingredient.id) && Objects.equals(name, ingredient.name) && Objects.equals(unitPrice, ingredient.unitPrice) && Objects.equals(lastModificationDate, ingredient.lastModificationDate) && Objects.equals(unit, ingredient.unit) && Objects.equals(quantity, ingredient.quantity) && Objects.equals(montant, ingredient.montant);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, name, lastModificationDate, quantity, unitPrice, unit, montant);
+    }
     
 }

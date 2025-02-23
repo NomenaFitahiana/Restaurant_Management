@@ -31,7 +31,7 @@ public class IngredientDao implements CrudOperation <IngredientDto>{
                 double unitPrice = result.getDouble("unit_price");
                 Unit unit = Unit.valueOf(result.getString("unit"));
                 LocalDateTime lastModificationDate = result.getTimestamp("last_modification_date").toLocalDateTime();
-                int quantity = result.getInt("quantity");
+                double quantity = result.getDouble("quantity");
                 double montant = result.getDouble("montant");
 
                 IngredientDto ingredientDto = new IngredientDto(id, name, unitPrice, unit, lastModificationDate, quantity, montant);
