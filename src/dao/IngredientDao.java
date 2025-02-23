@@ -11,13 +11,13 @@ import java.util.List;
 import db.DataSource;
 import dto.IngredientDto;
 
-public class IngredientDao implements CrudOperation <Ingredient>{
+public class IngredientDao implements CrudOperation <IngredientDto>{
     DataSource dataSource = new DataSource();
     Connection connection = dataSource.getConnection();
 
     @Override
-    public List<Ingredient> getAll() {
-       String query = "select ingredient.name, price.unit_price,ingredient.unit,  price.addedon, dish_ingredient.quantity from ingredient join dish_ingredient on dish_ingredient.ingredient_id = ingredient.id join price on price.ingredient_id = ingredient.id where dish_ingredient.dish_id = 1;";
+    public List<IngredientDto> getAll() {
+       String query = "select i.id, i.name, i.last_modification_date, di.quantity, i.unit, p.unit_price, di.montant from ingredient i join dish_ingredient di on i.id = di.ingredient_id join price p on p.ingredient_id = di.ingredient_id;";
 
        List<Ingredient> ingredients = new ArrayList<>();
        List<IngredientDto> ingredientList = new ArrayList<>(); 
@@ -25,23 +25,24 @@ public class IngredientDao implements CrudOperation <Ingredient>{
        try (PreparedStatement statement = connection.prepareStatement(query)){
             ResultSet result = statement.executeQuery();
 
-
             while (result.next()) {
+                int id = result.getInt("id");
                 String name = result.getString("name");
                 double unitPrice = result.getDouble("unit_price");
                 Unit unit = Unit.valueOf(result.getString("unit"));
-                LocalDateTime addedOn = result.getTimestamp("addedon").toLocalDateTime();
+                LocalDateTime lastModificationDate = result.getTimestamp("last_modification_date").toLocalDateTime();
                 int quantity = result.getInt("quantity");
+                double montant = result.getDouble("montant");
 
-                IngredientDto ingredientDto = new IngredientDto(name, unitPrice, unit, addedOn, quantity);
+                IngredientDto ingredientDto = new IngredientDto(id, name, unitPrice, unit, lastModificationDate, quantity, montant);
                 ingredientList.add(ingredientDto);
 
-                Ingredient ingredient = new Ingredient(name, addedOn, unitPrice, unit);
-                ingredients.add(ingredient);
+                /*Ingredient ingredient = new Ingredient(name, addedOn, unitPrice, unit);
+                ingredients.add(ingredient);*/
             }
                
 
-            return ingredients;
+            return ingredientList;
        } catch (SQLException e) {
         throw new RuntimeException(e);
        }

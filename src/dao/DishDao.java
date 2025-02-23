@@ -9,7 +9,7 @@ import java.util.List;
 
 import db.DataSource;
 
-public class DishDao implements CrudOperation<Dish>{
+/*public class DishDao implements CrudOperation<Dish>{
     DataSource dataSource = new DataSource();
     Connection connection = dataSource.getConnection();
     IngredientDao ingredientDao = new IngredientDao();
@@ -41,4 +41,4 @@ public class DishDao implements CrudOperation<Dish>{
       
     }
     
-}
+}*/

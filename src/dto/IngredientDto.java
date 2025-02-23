@@ -5,18 +5,30 @@ import java.time.LocalDateTime;
 import dao.Unit;
 
 public class IngredientDto {
+    private int id;
     private String name;
     private double unitPrice;
     private Unit unit;
-    private LocalDateTime addedOn;
+    private LocalDateTime lastModificationDate;
     private int quantity;
+    private double montant;
 
-    public IngredientDto(String name, double unitPrice, Unit unit, LocalDateTime addedOn, int quantity) {
+    public IngredientDto(int id, String name, double unitPrice, Unit unit, LocalDateTime lastModificationDate, int quantity, double montant) {
         this.name = name;
         this.unitPrice = unitPrice;
         this.unit = unit;
-        this.addedOn = addedOn;
+        this.lastModificationDate = lastModificationDate;
         this.quantity = quantity;
+        this.id  = id;
+        this.montant = montant;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
     }
 
     public String getName() {
@@ -35,6 +47,14 @@ public class IngredientDto {
         this.unitPrice = unitPrice;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Unit getUnit() {
         return unit;
     }
@@ -43,12 +63,12 @@ public class IngredientDto {
         this.unit = unit;
     }
 
-    public LocalDateTime getAddedOn() {
-        return addedOn;
+    public LocalDateTime getLastModificationDate() {
+        return lastModificationDate;
     }
 
-    public void setAddedOn(LocalDateTime addedOn) {
-        this.addedOn = addedOn;
+    public void setLastModificationDate(LocalDateTime addedOn) {
+        this.lastModificationDate = addedOn;
     }
 
     public int getQuantity() {
@@ -61,8 +81,8 @@ public class IngredientDto {
 
     @Override
     public String toString() {
-        return "IngredientDto {name=" + name + ", unitPrice=" + unitPrice + ", unit=" + unit + ", addedOn=" + addedOn
-                + ", quantity=" + quantity + "}";
+        return "IngredientDto { id=" + id + ", name=" + name + ", lastModificationDate=" + lastModificationDate +  ", quantity=" + quantity + ", unit=" + unit + ", unitPrice=" + unitPrice  + " ,montant=" + montant 
+                + "}";
     }
 
     
