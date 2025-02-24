@@ -8,29 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.DataSource;
+import dto.IngredientDto;
 
-/*public class DishDao implements CrudOperation<Dish>{
+public class DishDao implements CrudOperation<Dish>{
     DataSource dataSource = new DataSource();
     Connection connection = dataSource.getConnection();
     IngredientDao ingredientDao = new IngredientDao();
 
-    @Override
-    public List<Dish> getAll() {
-      List<Ingredient> ingredients = ingredientDao.getAll();
-      String query = "select dish.name, dish.unit_price from dish";
-      List<Dish> dishes = new ArrayList<>();
+    public  List<Dish> getDishes(){
+        List<Dish> dishes = new ArrayList<>();
+        String query = "select * from dish;";
 
-       try (PreparedStatement statement = connection.prepareStatement(query)){
+        try (PreparedStatement statement = connection.prepareStatement(query)){
             ResultSet result = statement.executeQuery();
 
 
             while (result.next()) {
+                int id = result.getInt("id");
                 String name = result.getString("name");
                 double unitPrice = result.getDouble("unit_price");
-               
-                Dish dish = new Dish(name, unitPrice, ingredients);
-                dishes.add(dish);
+                List<Ingredient> ingredients = new ArrayList<>();
+                double productPrice = 0;
               
+                Dish dish = new Dish(id, name, unitPrice,ingredients);
+                dishes.add(dish);
             }
                
 
@@ -40,5 +41,23 @@ import db.DataSource;
        }
       
     }
+
+    @Override
+    public List<Dish> getAll() {
+        List<Dish> dishes = new ArrayList<>();
+        List<Dish> dishList = this.getDishes();
+
+       IngredientDao ingredientDao = new IngredientDao();
+
+    for(Dish d : dishList){
+       List<Ingredient> newIngredient = ingredientDao.convertToIngredient(d.getId());
+        Dish dish = new Dish(d.getId(), d.getName(), d.getUnitPrice(), newIngredient);
+        dish.setProductPrice(ingredientDao.getToral(d.getId())); 
+        dishes.add(dish);
+    }
+       
+
+        return dishes;
+    }
     
-}*/
+}

@@ -10,11 +10,12 @@ public class Ingredient {
     private Unit unit;
 
     public Ingredient(){};
-    public Ingredient(String  name, LocalDateTime lastModificationDate, double unitPrice, Unit unit){
+    public Ingredient(int id, String  name, LocalDateTime lastModificationDate, double unitPrice, Unit unit){
         this.name = name;
         this.lastModificationDate = lastModificationDate;
         this.unitPrice = unitPrice;
         this.unit = unit;
+        this.id = id;
     }
 
      public int getId() {

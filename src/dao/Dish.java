@@ -14,10 +14,11 @@ public class Dish{
 
     public Dish(){};
 
-    public Dish (String name, double unitPrice, List<Ingredient> ingredients){
+    public Dish (int id,String name, double unitPrice, List<Ingredient> ingredients){
         this.name = name;
         this.unitPrice = unitPrice;
         this.ingredients = ingredients;
+        this.id = id;
     }
 
     
@@ -49,10 +50,8 @@ public class Dish{
         return productPrice;
     }
 
-    public void setProductPrice() {
-        this.productPrice = this.getIngredients().stream()
-        .mapToDouble(ingredient -> ingredient.getUnitPrice())
-        .sum();
+    public void setProductPrice(double productPrice) {
+       this.productPrice = productPrice;
     }
 
     @Override
