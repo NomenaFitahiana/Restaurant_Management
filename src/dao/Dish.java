@@ -1,16 +1,16 @@
 package dao;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Objects;
 
-import dto.IngredientDto;
 
 public class Dish{
     private int id;
     private String name;
     private double unitPrice; 
     private List<Ingredient> ingredients;
-    private double productPrice;
+    private double ingredientsCost;
 
     public Dish(){};
 
@@ -46,12 +46,13 @@ public class Dish{
         this.ingredients = ingredients;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public String getIngredientsCost() {
+        DecimalFormat finalValue = new DecimalFormat("#.##");
+        return finalValue.format(ingredientsCost);
     }
 
-    public void setProductPrice(double productPrice) {
-       this.productPrice = productPrice;
+    public void setIngredientsCost(double ingredientsCost) {
+       this.ingredientsCost = ingredientsCost;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class Dish{
                         ", name = " + name +
                         ", unitPrice = " + unitPrice +
                         ", ingredients = " + ingredients + 
-                         ", productPrice = " + productPrice + "}";
+                         ", ingredientsCost = " + ingredientsCost + "}";
     }
 
     @Override
