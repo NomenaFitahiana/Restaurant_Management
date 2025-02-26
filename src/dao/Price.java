@@ -10,7 +10,7 @@ public class Price {
     
     public Price(double unitPrice, LocalDateTime addedOn) {
         this.unitPrice = unitPrice;
-        this.addedOn = addedOn;
+      this.addedOn = (addedOn == null) ? LocalDateTime.now() : addedOn;
     }
 
     public int getId() {
