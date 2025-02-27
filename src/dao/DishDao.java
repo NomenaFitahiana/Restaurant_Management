@@ -51,7 +51,7 @@ public class DishDao implements CrudOperation<Dish>{
     for(Dish d : dishList){
        List<Ingredient> newIngredient = ingredientDao.convertToIngredient(d.getId());
         Dish dish = new Dish(d.getId(), d.getName(), d.getUnitPrice(), newIngredient);
-        dish.setIngredientsCost(ingredientDao.getToral(d.getId())); 
+        dish.setIngredientsCost(ingredientDao.getTotal(d.getId())); 
         dishes.add(dish);
     }
        

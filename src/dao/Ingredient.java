@@ -23,6 +23,14 @@ public class Ingredient {
 
     }
 
+    public Ingredient(int id, String  name, Unit unit, List<Price> prices ){
+        this.name = name;
+        this.unit = unit;
+        this.id = id;
+        this.prices = prices;
+
+    }
+
      public int getId() {
         return id;
     }
@@ -40,7 +48,8 @@ public class Ingredient {
     public String toString() {
         return "Ingredient { id = " + id +
                         ", name = " + name +
-                        ", unit = " + unit + "}";
+                        ", unit = " + unit +
+                        ", prices = " + prices + "}";
     }
 
     @Override

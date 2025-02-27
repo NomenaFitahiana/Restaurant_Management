@@ -11,15 +11,15 @@ public class IngredientDto {
     private String name;
     private double unitPrice;
     private Unit unit;
-    private LocalDateTime lastModificationDate;
+    private LocalDateTime addedOn;
     private double quantity;
     private double montant;
 
-    public IngredientDto(int id, String name, double unitPrice, Unit unit, LocalDateTime lastModificationDate, double quantity, double montant) {
+    public IngredientDto(int id, String name, double unitPrice, Unit unit, LocalDateTime addedOn, double quantity, double montant) {
         this.name = name;
         this.unitPrice = unitPrice;
         this.unit = unit;
-        this.lastModificationDate = lastModificationDate;
+        this.addedOn = addedOn;
         this.quantity = quantity;
         this.id  = id;
         this.montant = montant;
@@ -65,12 +65,12 @@ public class IngredientDto {
         this.unit = unit;
     }
 
-    public LocalDateTime getLastModificationDate() {
-        return lastModificationDate;
+    public LocalDateTime getAddedOn() {
+        return addedOn;
     }
 
-    public void setLastModificationDate(LocalDateTime addedOn) {
-        this.lastModificationDate = addedOn;
+    public void setAddedOn(LocalDateTime addedOn) {
+        this.addedOn = addedOn;
     }
 
     public double getQuantity() {
@@ -83,7 +83,7 @@ public class IngredientDto {
 
     @Override
     public String toString() {
-        return "IngredientDto { id=" + id + ", name=" + name + ", lastModificationDate=" + lastModificationDate +  ", quantity=" + quantity + ", unit=" + unit + ", unitPrice=" + unitPrice  + " ,montant=" + montant 
+        return "IngredientDto { id=" + id + ", name=" + name + ", addedOn=" + addedOn +  ", quantity=" + quantity + ", unit=" + unit + ", unitPrice=" + unitPrice  + " ,montant=" + montant 
                 + "}";
     }
 
@@ -94,12 +94,12 @@ public class IngredientDto {
 
         IngredientDto ingredient = (IngredientDto) o;
 
-        return Objects.equals(id, ingredient.id) && Objects.equals(name, ingredient.name) && Objects.equals(unitPrice, ingredient.unitPrice) && Objects.equals(lastModificationDate, ingredient.lastModificationDate) && Objects.equals(unit, ingredient.unit) && Objects.equals(quantity, ingredient.quantity) && Objects.equals(montant, ingredient.montant);
+        return Objects.equals(id, ingredient.id) && Objects.equals(name, ingredient.name) && Objects.equals(unitPrice, ingredient.unitPrice) && Objects.equals(addedOn, ingredient.addedOn) && Objects.equals(unit, ingredient.unit) && Objects.equals(quantity, ingredient.quantity) && Objects.equals(montant, ingredient.montant);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(id, name, lastModificationDate, quantity, unitPrice, unit, montant);
+        return Objects.hash(id, name, addedOn, quantity, unitPrice, unit, montant);
     }
     
 }

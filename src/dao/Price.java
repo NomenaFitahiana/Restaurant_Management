@@ -39,7 +39,7 @@ public class Price {
 
     @Override
     public String toString() {
-        return "Price [id=" + id + ", unitPrice=" + unitPrice + ", addedOn=" + addedOn + "]";
+        return "Price [ unitPrice=" + unitPrice + ", addedOn=" + addedOn + "]";
     }
 
    @Override
