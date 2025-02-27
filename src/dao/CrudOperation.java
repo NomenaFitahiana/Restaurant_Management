@@ -1,8 +1,9 @@
 package dao;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import dao.entity.Criteria;
+
 public interface CrudOperation  <T>{
-     List<T> getAll(int pageSize, int page);
+     List<T> getAll(int pageSize, int page, List<Criteria> criterias);
 }

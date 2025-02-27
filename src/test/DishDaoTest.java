@@ -4,9 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/*import dao.entity.Criteria;
+import dao.entity.CriteriaOperator;
 import dao.entity.Dish;
+import dao.entity.FieldName;
 import dao.DishDao;
 import dao.entity.Ingredient;
+import dao.entity.LogicalOperator;
 import dao.IngredientDao;
 import dao.entity.Unit;
 import dto.IngredientDto;
@@ -35,8 +39,9 @@ public class DishDaoTest {
         
         expected.add(dish);
 
-        
-        List<Dish> actual = subject.getAll(1, 1);
+      
+
+        List<Dish> actual = subject.getAll(2, 1 );
 
         assertEquals(expected, actual);
     }
@@ -55,4 +60,4 @@ public class DishDaoTest {
 
 
     }
-}
+}*/

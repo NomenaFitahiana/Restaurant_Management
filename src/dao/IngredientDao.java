@@ -1,7 +1,5 @@
 package dao;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.entity.Criteria;
 import dao.entity.Ingredient;
 import dao.entity.Price;
 import dao.entity.Unit;
@@ -21,21 +20,23 @@ public class IngredientDao implements CrudOperation <Ingredient>{
     DataSource dataSource = new DataSource();
     Connection connection = dataSource.getConnection();
 
-    // TODOS : get misy filtre miaraka amin'ny date | checker-na ilay date any am price dia izay mifanaraka amin'iny no alaina na izay manakaiky azy
-
     @Override
-    public List<Ingredient> getAll(int pageSize, int page){
+    public List<Ingredient> getAll(int pageSize, int page, List<Criteria> criterias){
         List<Price> prices = new ArrayList<>();
         List<Ingredient> ingredientList = new ArrayList<>(); 
-        String query = "select i.id, i.name, i.unit from ingredient i limit ? offset ?;";
+        StringBuilder query = new StringBuilder("select i.id, i.name, i.unit from ingredient i where 1 = 1 ");
+
+        criterias.forEach(criteria -> query.append(criteria.getLogicalOperator()).append(" ").append(criteria.getFieldName()).append(" ").append(criteria.getCriteriaOperator()).append(" ").append(criteria.getValue()));
+
+        query.append(" limit ? offset ?;");
 
         int offset = pageSize * (page - 1);
 
-        try (PreparedStatement statement = connection.prepareStatement(query)){
+        try (PreparedStatement statement = connection.prepareStatement(query.toString())){
 
             statement.setInt(1, pageSize);
             statement.setInt(2, offset);
-            
+
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {

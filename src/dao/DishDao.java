@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.entity.Criteria;
 import dao.entity.Dish;
 import dao.entity.Ingredient;
 import db.DataSource;
-import dto.IngredientDto;
 
 public class DishDao implements CrudOperation<Dish>{
     DataSource dataSource = new DataSource();
@@ -49,7 +49,7 @@ public class DishDao implements CrudOperation<Dish>{
     }
 
     @Override
-    public List<Dish> getAll(int page, int pageSize) {
+    public List<Dish> getAll(int page, int pageSize, List<Criteria> criterias) {
         List<Dish> dishes = new ArrayList<>();
         List<Dish> dishList = this.getDishes(page, pageSize);
 

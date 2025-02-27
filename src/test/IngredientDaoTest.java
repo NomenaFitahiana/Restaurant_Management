@@ -1,11 +1,16 @@
 package test;
 
-/*import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.IngredientDao;
-import dao.Unit;
+import dao.entity.Criteria;
+import dao.entity.CriteriaOperator;
+import dao.entity.FieldName;
+import dao.entity.Ingredient;
+import dao.entity.LogicalOperator;
+import dao.entity.Unit;
 import dto.IngredientDto;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,21 +21,23 @@ public class IngredientDaoTest {
    public void get_all_ingredients_ok(){
     IngredientDao subject = new IngredientDao();
 
-    List<IngredientDto> expected = new ArrayList<>();
+    List<Ingredient> expected = new ArrayList<>();
 
-    IngredientDto expected1 = new IngredientDto(1, "Saucisse", 20.0, Unit.G, LocalDateTime.parse("2025-01-01T00:00"), 100, 2000.0);
-    IngredientDto expected2 = new IngredientDto(2, "Huile", 10000.0 , Unit.L, LocalDateTime.parse("2025-01-01T00:00"), 0.15000000596046448, 1500.00005960464);
-    IngredientDto expected3 = new IngredientDto(3, "Oeuf", 1000.0, Unit.U, LocalDateTime.parse("2025-01-01T00:00"), 1, 1000.0);
-    IngredientDto expected4 = new IngredientDto(4, "Pain", 1000.0, Unit.U, LocalDateTime.parse("2025-01-01T00:00"), 1, 1000.0);
+    Ingredient expected1 = new Ingredient(1, "Saucisse", Unit.G, 20.0, LocalDateTime.parse("2025-01-01T00:00"));
+    Ingredient expected2 = new Ingredient(2, "Huile",Unit.L, 10000.0 , LocalDateTime.parse("2025-01-01T00:00"));
+   
 
     expected.add(expected1);
     expected.add(expected2);
-    expected.add(expected3);
-    expected.add(expected4);
+   
+   Criteria criteria = new Criteria(FieldName.name, "'%u%'", CriteriaOperator.ILIKE, LogicalOperator.AND);
+   List<Criteria> cr = new ArrayList<>();
+   cr.add(criteria);
 
-    List<IngredientDto> actual = subject.getAll();
+
+    List<Ingredient> actual = subject.getAll(2, 1, cr);
 
     assertEquals(expected, actual);
 
    }
-}*/
+}

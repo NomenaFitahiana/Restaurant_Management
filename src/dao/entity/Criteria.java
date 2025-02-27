@@ -14,6 +14,56 @@ public class Criteria {
         LogicalOperator = logicalOperator;
     }
 
+    
+
+    public FieldName getFieldName() {
+        return fieldName;
+    }
+
+
+
+    public void setFieldName(FieldName fieldName) {
+        this.fieldName = fieldName;
+    }
+
+
+
+    public String getValue() {
+        return value;
+    }
+
+
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+
+
+    public CriteriaOperator getCriteriaOperator() {
+        return CriteriaOperator;
+    }
+
+
+
+    public void setCriteriaOperator(CriteriaOperator criteriaOperator) {
+        CriteriaOperator = criteriaOperator;
+    }
+
+
+
+    public LogicalOperator getLogicalOperator() {
+        return LogicalOperator;
+    }
+
+
+
+    public void setLogicalOperator(LogicalOperator logicalOperator) {
+        LogicalOperator = logicalOperator;
+    }
+
+
+
     @Override
     public String toString() {
         return "Criteria [fieldName=" + fieldName + ", value=" + value + ", CriteriaOperator=" + CriteriaOperator
