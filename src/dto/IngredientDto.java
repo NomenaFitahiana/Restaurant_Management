@@ -3,8 +3,8 @@ package dto;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import dao.Ingredient;
-import dao.Unit;
+import dao.entity.Ingredient;
+import dao.entity.Unit;
 
 public class IngredientDto {
     private int id;

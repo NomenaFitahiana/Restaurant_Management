@@ -1,4 +1,4 @@
-package dao;
+package dao.entity;
 
 public enum LogicalOperator {
 

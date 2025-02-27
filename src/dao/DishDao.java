@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.entity.Dish;
+import dao.entity.Ingredient;
 import db.DataSource;
 import dto.IngredientDto;
 

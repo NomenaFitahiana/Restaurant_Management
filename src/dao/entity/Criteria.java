@@ -1,4 +1,4 @@
-package dao;
+package dao.entity;
 
 public class Criteria {
     private String fieldName;

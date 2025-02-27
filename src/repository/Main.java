@@ -3,11 +3,11 @@ package repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import dao.Dish;
-import dao.Ingredient;
 import dao.DishDao;
 import dao.IngredientDao;
-import dao.Unit;
+import dao.entity.Dish;
+import dao.entity.Ingredient;
+import dao.entity.Unit;
 
 public class Main {
     public static void main(String[] args) {

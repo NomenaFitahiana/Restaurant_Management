@@ -1,4 +1,4 @@
-package dao;
+package dao.entity;
 
 import java.text.DecimalFormat;
 import java.util.List;

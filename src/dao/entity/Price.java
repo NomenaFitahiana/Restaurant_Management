@@ -1,4 +1,4 @@
-package dao;
+package dao.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

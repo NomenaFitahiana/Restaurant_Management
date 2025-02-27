@@ -1,14 +1,14 @@
 package test;
 
-/*import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dish;
+import dao.entity.Dish;
 import dao.DishDao;
-import dao.Ingredient;
+import dao.entity.Ingredient;
 import dao.IngredientDao;
-import dao.Unit;
+import dao.entity.Unit;
 import dto.IngredientDto;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,10 +20,10 @@ public class DishDaoTest {
 
         List<Dish> expected = new ArrayList<>();
 
-        Ingredient ing1 = new Ingredient(1, "Saucisse", LocalDateTime.parse("2025-01-01T00:00"),20.0,Unit.G);
-        Ingredient ing2 = new Ingredient(2, "Huile", LocalDateTime.parse("2025-01-01T00:00"), 10000.0, Unit.L);
-        Ingredient ing3 = new Ingredient(3, "Oeuf", LocalDateTime.parse("2025-01-01T00:00"), 1000.0, Unit.U);
-        Ingredient ing4 = new Ingredient(4, "Pain", LocalDateTime.parse("2025-01-01T00:00"),1000.0, Unit.U );
+        Ingredient ing1 = new Ingredient(1, "Saucisse",Unit.G,20.0, LocalDateTime.parse("2025-01-01T00:00"));
+        Ingredient ing2 = new Ingredient(2, "Huile",Unit.L, 10000.0,LocalDateTime.parse("2025-01-01T00:00") );
+        Ingredient ing3 = new Ingredient(3, "Oeuf",Unit.U,1000.0, LocalDateTime.parse("2025-01-01T00:00") );
+        Ingredient ing4 = new Ingredient(4, "Pain",Unit.U ,1000.0, LocalDateTime.parse("2025-01-01T00:00") );
 
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(ing1);
@@ -55,4 +55,4 @@ public class DishDaoTest {
 
 
     }
-}*/
+}
