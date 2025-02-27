@@ -22,46 +22,20 @@ public class IngredientDao implements CrudOperation <Ingredient>{
     Connection connection = dataSource.getConnection();
 
     // TODOS : get misy filtre miaraka amin'ny date | checker-na ilay date any am price dia izay mifanaraka amin'iny no alaina na izay manakaiky azy
-    
-    /*@Override
-    public List<IngredientDto> getAll() {
-       String query = "select i.id, i.name, p.addedon, di.quantity, i.unit, p.unit_price, di.montant from ingredient i join dish_ingredient di on i.id = di.ingredient_id join price p on p.ingredient_id = di.ingredient_id;";
-       List<Price> prices = new ArrayList<>();
-       List<IngredientDto> ingredientList = new ArrayList<>(); 
-
-       try (PreparedStatement statement = connection.prepareStatement(query)){
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                int id = result.getInt("id");
-                String name = result.getString("name");
-                double unitPrice = result.getDouble("unit_price");
-                Unit unit = Unit.valueOf(result.getString("unit"));
-                LocalDateTime lastModificationDate = result.getTimestamp("addedon").toLocalDateTime();
-                double quantity = result.getDouble("quantity");
-                double montant = result.getDouble("montant");
-
-                IngredientDto ingredientDto = new IngredientDto(id, name, unitPrice, unit, lastModificationDate, quantity, montant);
-                ingredientList.add(ingredientDto);
-
-            }
-               
-
-            return ingredientList;
-       } catch (SQLException e) {
-        throw new RuntimeException(e);
-       }
-
-     
-    }*/
 
     @Override
-    public List<Ingredient> getAll(){
+    public List<Ingredient> getAll(int pageSize, int page){
         List<Price> prices = new ArrayList<>();
         List<Ingredient> ingredientList = new ArrayList<>(); 
-        String query = "select i.id, i.name, i.unit from ingredient i;";
+        String query = "select i.id, i.name, i.unit from ingredient i limit ? offset ?;";
+
+        int offset = pageSize * (page - 1);
 
         try (PreparedStatement statement = connection.prepareStatement(query)){
+
+            statement.setInt(1, pageSize);
+            statement.setInt(2, offset);
+            
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {

@@ -1,12 +1,12 @@
 package dao.entity;
 
 public class Criteria {
-    private String fieldName;
+    private FieldName fieldName;
     private String value;
     private CriteriaOperator CriteriaOperator;
     private LogicalOperator LogicalOperator;
 
-    public Criteria(String fieldName, String value, CriteriaOperator criteriaOperator,
+    public Criteria(FieldName fieldName, String value, CriteriaOperator criteriaOperator,
             LogicalOperator logicalOperator) {
         this.fieldName = fieldName;
         this.value = value;

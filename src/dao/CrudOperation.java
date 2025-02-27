@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CrudOperation  <T>{
-     List<T> getAll();
+     List<T> getAll(int pageSize, int page);
 }

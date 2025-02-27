@@ -16,7 +16,7 @@ public class Main {
 
         //System.out.println(dish.getAll());
        //System.out.println(ingredientDao.getByDishId(1));
-     List<Dish> dishes = dish.getAll();
+     List<Dish> dishes = dish.getAll(1, 1);
 
       for (Dish d : dishes) {
         System.out.println(d.getIngredientsCost());
@@ -24,6 +24,6 @@ public class Main {
 
       //Ingredient ing = new Ingredient(1, "A", Unit.G, 1500.0, LocalDateTime.parse("2025-01-01T00:00"));
 
-      System.out.println(dish.getAll());
+      System.out.println(dish.getAll(1, 1));
     }
 }

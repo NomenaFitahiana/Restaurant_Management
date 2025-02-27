@@ -36,7 +36,7 @@ public class DishDaoTest {
         expected.add(dish);
 
         
-        List<Dish> actual = subject.getAll();
+        List<Dish> actual = subject.getAll(1, 1);
 
         assertEquals(expected, actual);
     }
@@ -47,7 +47,7 @@ public class DishDaoTest {
         String expected = "5500";
 
 
-        List<Dish> actualDishes = subject.getAll();
+        List<Dish> actualDishes = subject.getAll(1, 1);
         
         String actual = actualDishes.get(0).getIngredientsCost();
 

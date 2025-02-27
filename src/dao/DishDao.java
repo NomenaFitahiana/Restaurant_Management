@@ -17,11 +17,16 @@ public class DishDao implements CrudOperation<Dish>{
     Connection connection = dataSource.getConnection();
     IngredientDao ingredientDao = new IngredientDao();
 
-    public  List<Dish> getDishes(){
+    public  List<Dish> getDishes(int pageSize, int page){
         List<Dish> dishes = new ArrayList<>();
-        String query = "select * from dish;";
+        String query = "select * from dish limit ? offset ?;";
 
         try (PreparedStatement statement = connection.prepareStatement(query)){
+            int offset = pageSize * (page - 1);
+
+            statement.setInt(1, pageSize);
+            statement.setInt(2, offset);
+
             ResultSet result = statement.executeQuery();
 
 
@@ -44,9 +49,9 @@ public class DishDao implements CrudOperation<Dish>{
     }
 
     @Override
-    public List<Dish> getAll() {
+    public List<Dish> getAll(int page, int pageSize) {
         List<Dish> dishes = new ArrayList<>();
-        List<Dish> dishList = this.getDishes();
+        List<Dish> dishList = this.getDishes(page, pageSize);
 
        IngredientDao ingredientDao = new IngredientDao();
 
