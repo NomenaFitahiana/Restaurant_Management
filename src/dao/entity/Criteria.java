@@ -3,10 +3,10 @@ package dao.entity;
 public class Criteria {
     private FieldName fieldName;
     private String value;
-    private CriteriaOperator CriteriaOperator;
+    private String CriteriaOperator;
     private LogicalOperator LogicalOperator;
 
-    public Criteria(FieldName fieldName, String value, CriteriaOperator criteriaOperator,
+    public Criteria(FieldName fieldName, String value, String criteriaOperator,
             LogicalOperator logicalOperator) {
         this.fieldName = fieldName;
         this.value = value;
@@ -40,13 +40,13 @@ public class Criteria {
 
 
 
-    public CriteriaOperator getCriteriaOperator() {
+    public String getCriteriaOperator() {
         return CriteriaOperator;
     }
 
 
 
-    public void setCriteriaOperator(CriteriaOperator criteriaOperator) {
+    public void setCriteriaOperator(String criteriaOperator) {
         CriteriaOperator = criteriaOperator;
     }
 

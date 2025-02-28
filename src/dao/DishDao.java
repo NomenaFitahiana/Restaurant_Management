@@ -17,11 +17,15 @@ public class DishDao implements CrudOperation<Dish>{
     Connection connection = dataSource.getConnection();
     IngredientDao ingredientDao = new IngredientDao();
 
-    public  List<Dish> getDishes(int pageSize, int page){
+    public  List<Dish> getDishes(int pageSize, int page, List<Criteria> criterias){
         List<Dish> dishes = new ArrayList<>();
-        String query = "select * from dish limit ? offset ?;";
+        StringBuilder query = new StringBuilder("select d.id, d.name, d.unit_price from dish d where 1 = 1 ");
 
-        try (PreparedStatement statement = connection.prepareStatement(query)){
+        criterias.forEach(criteria -> query.append(criteria.getLogicalOperator()).append(" ").append(criteria.getFieldName()).append(" ").append(criteria.getCriteriaOperator()).append(" ").append(criteria.getValue()));
+
+        query.append(" limit ? offset ?;");
+
+        try (PreparedStatement statement = connection.prepareStatement(query.toString())){
             int offset = pageSize * (page - 1);
 
             statement.setInt(1, pageSize);
@@ -51,7 +55,7 @@ public class DishDao implements CrudOperation<Dish>{
     @Override
     public List<Dish> getAll(int page, int pageSize, List<Criteria> criterias) {
         List<Dish> dishes = new ArrayList<>();
-        List<Dish> dishList = this.getDishes(page, pageSize);
+        List<Dish> dishList = this.getDishes(page, pageSize, criterias);
 
        IngredientDao ingredientDao = new IngredientDao();
 
@@ -64,6 +68,33 @@ public class DishDao implements CrudOperation<Dish>{
        
 
         return dishes;
+    }
+
+    @Override
+    public Dish getById(int id) {
+        String query = "select d.id, d.name, d.unit_price from dish d where id = ?;";
+        Dish dish = new Dish();
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+
+            ResultSet result = statement.executeQuery();
+            
+            if(result.next()){
+                String name = result.getString("name");
+                double unitPrice = result.getDouble("unit_price");
+                List<Ingredient> ingredients = ingredientDao.convertToIngredient(id);
+
+                 dish = new Dish(id, name, unitPrice, ingredients);
+                 dish.setIngredientsCost(ingredientDao.getTotal(id));
+            } else {
+                return null;
+            }
+
+            return dish;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }

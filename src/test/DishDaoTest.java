@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/*import dao.entity.Criteria;
+import dao.entity.Criteria;
 import dao.entity.CriteriaOperator;
 import dao.entity.Dish;
 import dao.entity.FieldName;
@@ -18,11 +18,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DishDaoTest {
+
+    
+
     @Test 
     public void get_all_dishes_ok(){
         DishDao subject = new DishDao();
 
         List<Dish> expected = new ArrayList<>();
+
+        Criteria criteria = new Criteria(FieldName.name, "'hot dog'", CriteriaOperator.EQUAL.getSymbol(), LogicalOperator.AND);
+        List<Criteria> cr = new ArrayList<>();
+        cr.add(criteria);
 
         Ingredient ing1 = new Ingredient(1, "Saucisse",Unit.G,20.0, LocalDateTime.parse("2025-01-01T00:00"));
         Ingredient ing2 = new Ingredient(2, "Huile",Unit.L, 10000.0,LocalDateTime.parse("2025-01-01T00:00") );
@@ -41,7 +48,7 @@ public class DishDaoTest {
 
       
 
-        List<Dish> actual = subject.getAll(2, 1 );
+        List<Dish> actual = subject.getAll(2, 1, cr );
 
         assertEquals(expected, actual);
     }
@@ -51,8 +58,11 @@ public class DishDaoTest {
         DishDao subject = new DishDao();
         String expected = "5500";
 
+        Criteria criteria = new Criteria(FieldName.name, "'hot dog'", CriteriaOperator.EQUAL.getSymbol(), LogicalOperator.AND);
+        List<Criteria> cr = new ArrayList<>();
+        cr.add(criteria);
 
-        List<Dish> actualDishes = subject.getAll(1, 1);
+        List<Dish> actualDishes = subject.getAll(1, 1, cr);
         
         String actual = actualDishes.get(0).getIngredientsCost();
 
@@ -60,4 +70,4 @@ public class DishDaoTest {
 
 
     }
-}*/
+}

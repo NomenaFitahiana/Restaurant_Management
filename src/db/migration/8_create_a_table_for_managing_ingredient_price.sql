@@ -4,7 +4,7 @@ create table if not exists price (
     id int primary key, 
     unit_price float,
     montant float,
-    addedon TIMESTAMP,
+    addedon TIMESTAMP default CURRENT_TIMESTAMP,
 );
 
 alter table price add column ingredient_id int;

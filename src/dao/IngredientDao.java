@@ -135,4 +135,28 @@ public class IngredientDao implements CrudOperation <Ingredient>{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Ingredient getById(int id) {
+        String query = "SELECT i.id, i.name, i.unit FROM ingredient i WHERE i.id = ?;";
+    
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+    
+            ResultSet result = statement.executeQuery();
+    
+            if (result.next()) {
+                String name = result.getString("name");
+                Unit unit = Unit.valueOf(result.getString("unit"));
+                List<Price> prices = getPriceByIngId(id);
+    
+                return new Ingredient(id, name, unit, prices);
+            } else {
+                return null; 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
 }

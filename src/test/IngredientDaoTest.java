@@ -30,7 +30,7 @@ public class IngredientDaoTest {
     expected.add(expected1);
     expected.add(expected2);
    
-   Criteria criteria = new Criteria(FieldName.name, "'%u%'", CriteriaOperator.ILIKE, LogicalOperator.AND);
+   Criteria criteria = new Criteria(FieldName.name, "'%u%'", CriteriaOperator.ILIKE.getSymbol(), LogicalOperator.AND);
    List<Criteria> cr = new ArrayList<>();
    cr.add(criteria);
 
