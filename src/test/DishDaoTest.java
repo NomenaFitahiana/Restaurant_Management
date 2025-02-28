@@ -11,6 +11,8 @@ import dao.entity.FieldName;
 import dao.DishDao;
 import dao.entity.Ingredient;
 import dao.entity.LogicalOperator;
+import dao.entity.Order;
+import dao.entity.SortCriteria;
 import dao.IngredientDao;
 import dao.entity.Unit;
 import dto.IngredientDto;
@@ -46,9 +48,10 @@ public class DishDaoTest {
         
         expected.add(dish);
 
+        SortCriteria sortCriterias = new SortCriteria(FieldName.name, Order.ASC);
       
 
-        List<Dish> actual = subject.getAll(2, 1, cr );
+        List<Dish> actual = subject.getAll(2, 1, cr, sortCriterias );
 
         assertEquals(expected, actual);
     }
@@ -62,7 +65,9 @@ public class DishDaoTest {
         List<Criteria> cr = new ArrayList<>();
         cr.add(criteria);
 
-        List<Dish> actualDishes = subject.getAll(1, 1, cr);
+        SortCriteria sortCriterias = new SortCriteria(FieldName.name, Order.ASC);
+
+        List<Dish> actualDishes = subject.getAll(1, 1, cr, sortCriterias);
         
         String actual = actualDishes.get(0).getIngredientsCost();
 

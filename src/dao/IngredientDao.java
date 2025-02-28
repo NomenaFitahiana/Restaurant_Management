@@ -12,6 +12,7 @@ import java.util.List;
 import dao.entity.Criteria;
 import dao.entity.Ingredient;
 import dao.entity.Price;
+import dao.entity.SortCriteria;
 import dao.entity.Unit;
 import db.DataSource;
 import dto.IngredientDto;
@@ -21,12 +22,22 @@ public class IngredientDao implements CrudOperation <Ingredient>{
     Connection connection = dataSource.getConnection();
 
     @Override
-    public List<Ingredient> getAll(int pageSize, int page, List<Criteria> criterias){
+    public List<Ingredient> getAll(int pageSize, int page, List<Criteria> criterias, SortCriteria sort){
         List<Price> prices = new ArrayList<>();
         List<Ingredient> ingredientList = new ArrayList<>(); 
         StringBuilder query = new StringBuilder("select i.id, i.name, i.unit from ingredient i where 1 = 1 ");
 
         criterias.forEach(criteria -> query.append(criteria.getLogicalOperator()).append(" ").append(criteria.getFieldName()).append(" ").append(criteria.getCriteriaOperator()).append(" ").append(criteria.getValue()));
+
+        if (sort != null) {
+            query.append(" ORDER BY ")
+                 .append(sort.getFieldName())
+                 .append(" ")
+                 .append(sort.getOrder());
+        }
+        
+          
+    
 
         query.append(" limit ? offset ?;");
 

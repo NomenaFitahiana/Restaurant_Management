@@ -10,6 +10,7 @@ import java.util.List;
 import dao.entity.Criteria;
 import dao.entity.Dish;
 import dao.entity.Ingredient;
+import dao.entity.SortCriteria;
 import db.DataSource;
 
 public class DishDao implements CrudOperation<Dish>{
@@ -17,12 +18,20 @@ public class DishDao implements CrudOperation<Dish>{
     Connection connection = dataSource.getConnection();
     IngredientDao ingredientDao = new IngredientDao();
 
-    public  List<Dish> getDishes(int pageSize, int page, List<Criteria> criterias){
+    public  List<Dish> getDishes(int pageSize, int page, List<Criteria> criterias, SortCriteria sort){
         List<Dish> dishes = new ArrayList<>();
         StringBuilder query = new StringBuilder("select d.id, d.name, d.unit_price from dish d where 1 = 1 ");
 
         criterias.forEach(criteria -> query.append(criteria.getLogicalOperator()).append(" ").append(criteria.getFieldName()).append(" ").append(criteria.getCriteriaOperator()).append(" ").append(criteria.getValue()));
 
+        if (sort != null) {
+            query.append(" ORDER BY ")
+                 .append(sort.getFieldName())
+                 .append(" ")
+                 .append(sort.getOrder());
+        }
+        
+    
         query.append(" limit ? offset ?;");
 
         try (PreparedStatement statement = connection.prepareStatement(query.toString())){
@@ -53,9 +62,9 @@ public class DishDao implements CrudOperation<Dish>{
     }
 
     @Override
-    public List<Dish> getAll(int page, int pageSize, List<Criteria> criterias) {
+    public List<Dish> getAll(int page, int pageSize, List<Criteria> criterias, SortCriteria sort) {
         List<Dish> dishes = new ArrayList<>();
-        List<Dish> dishList = this.getDishes(page, pageSize, criterias);
+        List<Dish> dishList = this.getDishes(page, pageSize, criterias, sort);
 
        IngredientDao ingredientDao = new IngredientDao();
 
