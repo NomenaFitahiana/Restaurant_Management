@@ -55,6 +55,11 @@ public class Dish{
        this.ingredientsCost = ingredientsCost;
     }
 
+    public String getGrossMargin(){
+        DecimalFormat finalValue = new DecimalFormat("#.##");
+        return finalValue.format(this.getUnitPrice() - this.ingredientsCost);
+    }
+
     @Override
     public String toString() {
         return "Dish { id = " + id +

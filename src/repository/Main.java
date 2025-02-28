@@ -18,24 +18,24 @@ import dao.entity.Unit;
 
 public class Main {
     public static void main(String[] args) {
-        IngredientDao ingredientDao = new IngredientDao();
-        //DishDao dish = new DishDao();
+       // IngredientDao ingredientDao = new IngredientDao();
+        DishDao dish = new DishDao();
 
       /* Criteria criteria = new Criteria(FieldName.name, "'hot dog'", CriteriaOperator.EQUAL.getSymbol(), LogicalOperator.AND);
        List<Criteria> cr = new ArrayList<>();
        cr.add(criteria);*/
 
-       Criteria criteria = new Criteria(FieldName.name, "'%u%'", CriteriaOperator.ILIKE.getSymbol(), LogicalOperator.AND);
+       /*Criteria criteria = new Criteria(FieldName.name, "'%u%'", CriteriaOperator.ILIKE.getSymbol(), LogicalOperator.AND);
        List<Criteria> cr = new ArrayList<>();
        cr.add(criteria);
 
-       SortCriteria sortCriterias = new SortCriteria(FieldName.unit, Order.DESC);
+       SortCriteria sortCriterias = new SortCriteria(FieldName.unit, Order.DESC);*/
        
-
+      System.out.println(dish.getById(1).getGrossMargin());
 
        /*System.out.println(ingredientDao.getAll(2, 1, cr));*/
         //System.out.println(dish.getAll());
-       System.out.println(ingredientDao.getAll(2, 1, cr, sortCriterias));
+      // System.out.println(ingredientDao.getAll(2, 1, cr, sortCriterias));
     /* List<Dish> dishes = dish.getAll(1, 1);
 
       for (Dish d : dishes) {
