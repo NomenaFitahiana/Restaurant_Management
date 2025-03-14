@@ -14,5 +14,5 @@ create table if not exists ingredient (
     name varchar(20),
     last_modification_date TIMESTAMP,
     unit_price integer,
-    unit UNIT
+    unit char check (unit in ('G', 'L', 'U'))
 );
