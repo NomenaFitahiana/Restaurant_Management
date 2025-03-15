@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
        // IngredientDao ingredientDao = new IngredientDao();
         DishDao dish = new DishDao();
-
+        
       /* Criteria criteria = new Criteria(FieldName.name, "'hot dog'", CriteriaOperator.EQUAL.getSymbol(), LogicalOperator.AND);
        List<Criteria> cr = new ArrayList<>();
        cr.add(criteria);*/
@@ -30,7 +30,8 @@ public class Main {
        cr.add(criteria);
 
        SortCriteria sortCriterias = new SortCriteria(FieldName.unit, Order.DESC);*/
-       
+       System.out.println(dish.getById(1).getIngredientsCost());
+
       System.out.println(dish.getById(1).getGrossMargin());
 
        /*System.out.println(ingredientDao.getAll(2, 1, cr));*/

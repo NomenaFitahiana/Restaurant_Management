@@ -71,7 +71,7 @@ public class IngredientDao implements CrudOperation <Ingredient>{
     }
 
    public List<IngredientDto> getByDishId(int dish_id){
-        String query = "select i.id, i.name, p.added_on, di.quantity, i.unit, p.unit_price, di.montant from ingredient i join dish_ingredient di on i.id = di.ingredient_id join price p on p.ingredient_id = di.ingredient_id where di.dish_id = ? ";
+        String query = "select i.id, i.name, p.addedon, di.quantity, i.unit, p.unit_price, p.montant from ingredient i join dish_ingredient di on i.id = di.ingredient_id join price p on p.ingredient_id = di.ingredient_id where di.dish_id = ? ";
         List<IngredientDto> ingredients = new ArrayList<>();
         
         try ( PreparedStatement statement = connection.prepareStatement(query)){
@@ -84,7 +84,7 @@ public class IngredientDao implements CrudOperation <Ingredient>{
                 String name = result.getString("name");
                 double unitPrice = result.getDouble("unit_price");
                 Unit unit = Unit.valueOf(result.getString("unit"));
-                LocalDateTime lastModificationDate = result.getTimestamp("added_on").toLocalDateTime();
+                LocalDateTime lastModificationDate = result.getTimestamp("addedon").toLocalDateTime();
                 double quantity = result.getDouble("quantity");
                 double montant = result.getDouble("montant");
 
@@ -126,7 +126,7 @@ public class IngredientDao implements CrudOperation <Ingredient>{
     
     public List<Price> getPriceByIngId(int ingredientId){
         List<Price> prices = new ArrayList<>();
-        String query = "select id, unit_price, added_on from price where ingredient_id = ?;";
+        String query = "select id, unit_price, addedon from price where ingredient_id = ?;";
 
         try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, ingredientId);
@@ -135,7 +135,7 @@ public class IngredientDao implements CrudOperation <Ingredient>{
 
             while (result.next()) {
                 double unitPrice = result.getDouble("unit_price");
-                LocalDateTime addedOn = result.getTimestamp("added_on").toLocalDateTime();
+                LocalDateTime addedOn = result.getTimestamp("addedon").toLocalDateTime();
 
                 Price price = new Price(unitPrice, addedOn);
                 prices.add(price);
